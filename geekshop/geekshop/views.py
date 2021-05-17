@@ -6,6 +6,7 @@ from mainapp.models import Product, ProductCategory
 
 def main(request):
     products = Product.objects.all()[:4]
+    basket = ''
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user=request.user)
     context = {

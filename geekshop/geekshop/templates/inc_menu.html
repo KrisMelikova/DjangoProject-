@@ -28,7 +28,8 @@
         {% if basket %}
             <a href="{% url 'basket:list' %}" class="fa fa-shopping-basket">
                 <span>
-                    {% if basket %} {{ basket|length}} {% endif %}
+                    {{ basket.0.total_cost|floatformat:0 }} руб.
+                    ({{ basket.0.total_quantity }} шт.)
                 </span>
             </a>
         {% endif %}

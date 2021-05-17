@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block js %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'basketapp/js/basket.js' %}"></script>
+{% endblock %}
 
 {% block main_slider %}
-{% if user.is_authenticated %}
 <div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Продукт</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in basket %}
-            <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ item.product }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <div class="hero-white">
+
+        {% include 'inc_menu.html' %}
+
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="row">
+            <div class="basket_list">
+                {% include 'inc_basket_list.html' %}
+            </div>
+
+                <button class="btn btn-outline-info text-center col-2">
+                    <a href="{% url 'index' %}">На главную</a>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
 {% endif %}
