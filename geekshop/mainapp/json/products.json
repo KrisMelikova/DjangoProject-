@@ -1,0 +1,38 @@
+[
+  {
+      "category": "Дом",
+      "name": "Дизайнерский стул",
+      "image": "products_img/Screenshot_from_2021-05-04_17-36-09.png",
+      "short_desc": "Красивый и удобный",
+      "description": "",
+      "price": "15000.00",
+      "quantity": 10
+    },
+  {
+      "category": "Офис",
+      "name": "Письменный стол",
+      "image": "products_img/Screenshot_from_2021-05-04_17-39-55.png",
+      "short_desc": "За ним классно работается",
+      "description": "",
+      "price": "2500.50",
+      "quantity": 20
+    },
+  {
+      "category": "Офис",
+      "name": "Рабочий стол",
+      "image": "products_img/promo-img2.jpg",
+      "short_desc": "Отличный стул",
+      "description": "",
+      "price": "5000.00",
+      "quantity": 50
+    },
+  {
+      "category": "Дом",
+      "name": "Дизайнерский стол",
+      "image": "products_img/slider-hotdeal.jpg",
+      "short_desc": "Отличный стол",
+      "description": "",
+      "price": "10000.00",
+      "quantity": 60
+    }
+]
