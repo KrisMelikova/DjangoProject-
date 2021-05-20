@@ -1,22 +1,29 @@
-    <div class="header clearfix">
-        <a href="index.html" class="logo"></a>
-        <ul class="menu">
-            <li><a href="{% url 'index' %}" class="{% if request.resolver_match.route == '' %}
+<div class="header clearfix">
+    <a href="index.html" class="logo"></a>
+    <ul class="menu">
+        <li><a href="{% url 'index' %}" class="{% if request.resolver_match.route == '' %}
                         active
                       {% endif %}">домой</a></li>
-            <li><a href="{% url 'products:category' 0 %}" class="{% if request.resolver_match.route == 'products/' %}
+        <li><a href="{% url 'products:category' 0 %}" class="{% if request.resolver_match.route == 'products/' %}
                         active
                       {% endif %}">продукты</a></li>
-            <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.route == 'contacts/' %}
+        <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.route == 'contacts/' %}
                         active
                       {% endif %}">контакты</a></li>
-                {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
         <li>
             <a href="{% url 'auth:edit' %}">
                 {{ user.first_name|default:'Пользователь' }}
             </a>
         </li>
-    {% endif %}
+        {% endif %}
+        {% if user.is_superuser %}
+        <li>
+            <a href="{% url 'admin_staff:users' %}">
+                админка
+            </a>
+        </li>
+        {% endif%}
         <li>
             {% if user.is_authenticated %}
             <a href="{% url 'auth:logout' %}">выйти</a>
@@ -24,14 +31,14 @@
             <a href="{% url 'auth:login' %}">войти</a>
             {% endif %}
         </li>
-        </ul>
-        {% if basket %}
-            <a href="{% url 'basket:list' %}" class="fa fa-shopping-basket">
+    </ul>
+    {% if basket %}
+    <a href="{% url 'basket:list' %}" class="fa fa-shopping-basket">
                 <span>
                     {{ basket.0.total_cost|floatformat:0 }} руб.
                     ({{ basket.0.total_quantity }} шт.)
                 </span>
-            </a>
-        {% endif %}
-        <a href="#" class="search"></a>
-    </div>
+    </a>
+    {% endif %}
+    <a href="#" class="search"></a>
+</div>
