@@ -1,6 +1,7 @@
 import random
 
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
 
 from basketapp.models import Basket
@@ -27,7 +28,7 @@ def get_same_products(hot_products):
     return same_products
 
 
-def products(request, pk=None):
+def products(request, pk=None, page=1):
     print(pk)
     title = 'продукты'
     category = ''
@@ -39,10 +40,20 @@ def products(request, pk=None):
     if pk is not None:
         if pk == 0:
             products = Product.objects.all().order_by('price')
-            category = {'name': 'все'}
+            category = {
+                'pk': 0,
+                'name': 'все'}
         else:
             category = get_object_or_404(ProductCategory, pk=pk)
             products = Product.objects.filter(category_id__pk=pk).order_by('price')
+
+        paginator = Paginator(products, 2)
+        try:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
 
     hot_product = get_hot_product()
     same_products = get_same_products(hot_product)
@@ -51,7 +62,7 @@ def products(request, pk=None):
         'title': title,
         'categories': categories,
         'category': category,
-        'products': products,
+        'products': products_paginator,
         'basket': basket,
         'hot_product': hot_product,
         'same_products': same_products,
