@@ -1,1 +1,1 @@
-DjangoProject
+Shop on Python/Django
